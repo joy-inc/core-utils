@@ -1,2 +1,2 @@
-# JoyUtil
-utils
+# core-utils
+core utils
