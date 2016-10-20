@@ -1,14 +1,27 @@
 apply plugin: 'com.android.library'
+apply plugin: "com.github.dcendents.android-maven"
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    siteUrl = 'https://github.com/joy-inc/core-utils'// 项目的主页
+    gitUrl = 'git@github.com:joy-inc/core-utils.git'// Git仓库的url
+
+    libraryDescription = 'core-utils'// 项目描述
+    libraryName = "core-utils"// 发布到JCenter上的项目名字
+}
+
+version = "0.0.2"// This is the library version used when deploying the artifact
+group = "com.joy.support"// Maven Group ID for the artifact，一般填你唯一的包名
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 12
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 2
+        versionName version
     }
     buildTypes {
         release {
@@ -19,7 +32,69 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-annotations:24.2.0'
-//    compile 'com.android.support:support-core-utils:24.2.0'
+    compile rootProject.ext.dependencies.support_annotations
+}
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                // Add your description here
+                name libraryDescription
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'daishiwen'// 填写的一些基本信息
+                        name 'daishiwen'
+                        email 'daishiwen1212@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+//    archives javadocJar
+    archives sourcesJar
+}
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "joy-library"
+        name = libraryName
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
 }
