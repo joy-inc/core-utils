@@ -17,6 +17,11 @@ public class LogMgr {
         mIsDebug = false;
     }
 
+    public static boolean debug() {
+
+        return mIsDebug;
+    }
+
     public static void setTag(String tagName) {
 
         TAG = tagName;
