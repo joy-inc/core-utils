@@ -4,33 +4,8 @@ import android.util.Log;
 
 public class LogMgr {
 
-    private static String TAG = "LogMgr";
-    private static boolean mIsDebug = true;
-
-    public static void turnOn() {
-
-        mIsDebug = true;
-    }
-
-    public static void turnOff() {
-
-        mIsDebug = false;
-    }
-
-    public static boolean debug() {
-
-        return mIsDebug;
-    }
-
-    public static void setTag(String tagName) {
-
-        TAG = tagName;
-    }
-
-    public static String getTag() {
-
-        return TAG;
-    }
+    private static final String TAG = "LogMgr";
+    public static boolean DEBUG = true;
 
     public static void v(String log) {
 
@@ -39,7 +14,7 @@ public class LogMgr {
 
     public static void v(String tag, String log) {
 
-        if (mIsDebug)
+        if (DEBUG)
             Log.v(tag, log);
     }
 
@@ -50,7 +25,7 @@ public class LogMgr {
 
     public static void d(String tag, String log) {
 
-        if (mIsDebug)
+        if (DEBUG)
             Log.d(tag, log);
     }
 
@@ -61,7 +36,7 @@ public class LogMgr {
 
     public static void i(String tag, String log) {
 
-        if (mIsDebug)
+        if (DEBUG)
             Log.i(tag, log);
     }
 
@@ -72,7 +47,7 @@ public class LogMgr {
 
     public static void w(String tag, String log) {
 
-        if (mIsDebug)
+        if (DEBUG)
             Log.w(tag, log);
     }
 
@@ -83,7 +58,7 @@ public class LogMgr {
 
     public static void e(String tag, String log) {
 
-        if (mIsDebug)
+        if (DEBUG)
             Log.e(tag, log);
     }
 }
