@@ -15,19 +15,13 @@ public class AppUtil {
      * @return
      */
     public static long getInstallTime(@NonNull Context appContext) {
-
         long firstInstallTime = 0;
-
         try {
-
             PackageInfo packageInfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), 0);
             firstInstallTime = packageInfo.firstInstallTime;// 应用第一次安装的时间
-
         } catch (Exception e) {
-
             e.printStackTrace();
         }
-
         return firstInstallTime;
     }
 
@@ -35,14 +29,11 @@ public class AppUtil {
      * 检查app是否有安装
      */
     public static boolean checkAppHas(@NonNull Context appContext, String packageName) {
-
         try {
-
             PackageInfo packageInfo = appContext.getPackageManager().getPackageInfo(packageName, 0);
             int highBit = packageInfo.versionName.charAt(0);
             return highBit > 50 ? true : false;// 50 = 2
         } catch (Exception e) {
-
             e.printStackTrace();
             return false;
         }

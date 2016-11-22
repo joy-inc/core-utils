@@ -27,28 +27,23 @@ public class TimeUtil {
      * @return
      */
     public static String getSimpleTypeText(long millis) {
-
         return new SimpleDateFormat(DATE_FORMAT_SIMPLE).format(millis);
     }
 
     public static String getSimpleTypeChineseText(long millis) {
-
         return new SimpleDateFormat(DATE_FORMAT_DETAIL_CHINESE).format(millis);
     }
 
     public static String getSimpleDataText(long millis) {
-
         return new SimpleDateFormat(DATE_FORMAT_SIMPLE_POINT).format(millis);
     }
 
     public static String getFormatMonthDay(long timeMillis) {
-
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_MDW);
         return formatter.format(timeMillis);
     }
 
     public static String getWeekTip(long timeMillis) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date(timeMillis));
         int intWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
@@ -56,62 +51,50 @@ public class TimeUtil {
     }
 
     public static String getFormatTime(long timeInMillis, SimpleDateFormat dateFormat) {
-
         return dateFormat.format(new Date(timeInMillis));
     }
 
     public static String getSimpleTime(long timeInMillis) {
-
         return DateFormat.format(DATE_FORMAT_SIMPLE, timeInMillis).toString();
     }
 
     public static CharSequence getSimpleTimeCharSeq(long timeInMillis) {
-
         return DateFormat.format(DATE_FORMAT_SIMPLE, timeInMillis).toString();
     }
 
     public static String getDetailTime(long timeInMillis) {
-
         return DateFormat.format(DATE_FORMAT_DETAIL, timeInMillis).toString();
     }
 
     public static String getDetailTime2(long timeInMillis) {
-
         return DateFormat.format(DATE_FORMAT_DETAIL_2, timeInMillis).toString();
     }
 
     public static String getDetailTimeHour(long timeInMillis) {
-
         return DateFormat.format(DATE_FORMAT_HOUR, timeInMillis).toString();
     }
 
     public static String getDetailTimeNoSecond(long timeInMillis) {
-
         return new SimpleDateFormat(DATE_FORMAT_DETAIL_NO_SECOND).format(new Date(timeInMillis));
     }
 
     public static CharSequence getDetailTimeCharSeq(long timeInMillis) {
-
         return DateFormat.format(DATE_FORMAT_DETAIL, timeInMillis).toString();
     }
 
     public static long getCurrentTimeInLong() {
-
         return System.currentTimeMillis();
     }
 
     public static String getCurrentSimeTime() {
-
         return getSimpleTime(System.currentTimeMillis());
     }
 
     public static String getCurrentDetailTime() {
-
         return getDetailTime(System.currentTimeMillis());
     }
 
     public static String getCurrentTimeInString(SimpleDateFormat dateFormat) {
-
         return getFormatTime(getCurrentTimeInLong(), dateFormat);
     }
 
@@ -122,7 +105,6 @@ public class TimeUtil {
      */
     @SuppressLint("SimpleDateFormat")
     public static String getMyFormatDate(String mark) throws Exception {
-
         return new SimpleDateFormat(mark).format(new Date());
     }
 
@@ -135,7 +117,6 @@ public class TimeUtil {
      */
     @SuppressLint("SimpleDateFormat")
     public static String getFormatDateByCustomMarkAndUnixTime(String mark, long uTime) {
-
         return new SimpleDateFormat(mark).format(new Date(uTime * 1000));
     }
 
@@ -146,21 +127,16 @@ public class TimeUtil {
      * @return
      */
     public static String getFormatTime(long timeInMillis) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeInMillis);
         Calendar currCalendar = Calendar.getInstance();
 
         if (calendar.get(Calendar.YEAR) == currCalendar.get(Calendar.YEAR)) {
-
             if (calendar.get(Calendar.DAY_OF_YEAR) == currCalendar.get(Calendar.DAY_OF_YEAR)) {
-
                 return formatTimeTypeToday(calendar);
             } else if (calendar.get(Calendar.DAY_OF_YEAR) == currCalendar.get(Calendar.DAY_OF_YEAR) - 1) {
-
                 return formatTimeTypeYestorday(calendar);
             } else {
-
                 return formatTimeTypeThisYear(calendar);
             }
         }
@@ -168,27 +144,22 @@ public class TimeUtil {
     }
 
     private static String formatTimeTypeToday(Calendar calendar) {
-
         return DateFormat.format("kk:mm", calendar).toString();
     }
 
     private static String formatTimeTypeYestorday(Calendar calendar) {
-
         return new StringBuilder("昨天  ").append(DateFormat.format("kk:mm", calendar)).toString();
     }
 
     private static String formatTimeTypeThisYear(Calendar calendar) {
-
         return DateFormat.format("MM-dd kk:mm", calendar).toString();
     }
 
     private static String formatTimeTypeOther(Calendar calendar) {
-
         return DateFormat.format("yyyy-MM-dd kk:mm", calendar).toString();
     }
 
     public static boolean isAddSysTime(long currentTime, long prevTime) {
-
         return (float) (currentTime - prevTime) / 1000 > 5 * 60;
     }
 
@@ -197,7 +168,6 @@ public class TimeUtil {
      * @return
      */
     public static long getRFC822(String date) {
-
         java.text.DateFormat rfc822 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         try {
             return rfc822.parse(date).getTime();
@@ -213,12 +183,9 @@ public class TimeUtil {
      * @return
      */
     public static long getLocalTime(String timezone) {
-
         if (TextUtil.isNotEmpty(timezone) && timezone.length() > 3) {
-
             int cityTimeZone = MathUtil.parseInt(timezone.substring(0, 2), -1);
             if (cityTimeZone > -13 && cityTimeZone < 13) {
-
                 int timeZone = calcTimeZoneOffset(cityTimeZone, getSystemTimeZone());
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
@@ -237,18 +204,13 @@ public class TimeUtil {
      * @return
      */
     private static int calcTimeZoneOffset(int cityTimeZone, int systemTimeZone) {
-
         if (cityTimeZone >= 0 && systemTimeZone >= 0) {
-
             return cityTimeZone - systemTimeZone;
         } else if (cityTimeZone <= 0 && systemTimeZone <= 0) {
-
             return cityTimeZone - systemTimeZone;
         } else if (cityTimeZone >= 0 && systemTimeZone <= 0) {
-
             return cityTimeZone + Math.abs(systemTimeZone);
         } else if (cityTimeZone <= 0 && systemTimeZone >= 0) {
-
             return -(Math.abs(cityTimeZone) + systemTimeZone);
         }
         return 0;
@@ -260,7 +222,6 @@ public class TimeUtil {
      * @return
      */
     public static int getSystemTimeZone() {
-
         Calendar calendar = Calendar.getInstance();
         return calendar.getTimeZone().getOffset(System.currentTimeMillis()) / 1000 / 60 / 60;//系统返回的是偏移的毫秒数,除得的时间为"时"数
     }
