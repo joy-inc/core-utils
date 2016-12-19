@@ -12,6 +12,7 @@ public class TextUtil {
 
     public static final String TEXT_EMPTY = "";
     public static final String ZERO = "0";
+    public static final String ONE = "1";
 
     public static String filterNull(String str) {
         return str == null ? TEXT_EMPTY : str;
@@ -94,5 +95,13 @@ public class TextUtil {
             }
         }
         return (int) Math.round(len);
+    }
+
+    public static boolean isZero(String s) {
+        return ZERO.equals(s);
+    }
+
+    public static boolean isOne(String s) {
+        return ONE.equals(s);
     }
 }

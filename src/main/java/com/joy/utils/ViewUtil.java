@@ -103,4 +103,16 @@ public class ViewUtil {
             goneView(v);
         }
     }
+
+    public static boolean isVisible(View view) {
+        return view != null && view.getVisibility() == View.VISIBLE;
+    }
+
+    public static boolean isInvisible(View view) {
+        return !isVisible(view);
+    }
+
+    public static boolean isGone(View view) {
+        return view != null && view.getVisibility() == View.GONE;
+    }
 }
