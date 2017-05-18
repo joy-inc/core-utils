@@ -15,15 +15,6 @@ public class ToastUtil {
         }
     }
 
-    public static void showToast(@NonNull Context appContext, @StringRes int resId) {
-        try {
-            initToast(appContext);
-            mToast.setText(resId);
-            mToast.show();
-        } catch (Throwable t) {
-        }
-    }
-
     public static void showToast(@NonNull Context appContext, String text) {
         if (TextUtil.isEmpty(text)) {
             return;
@@ -33,7 +24,12 @@ public class ToastUtil {
             mToast.setText(text);
             mToast.show();
         } catch (Throwable t) {
+            t.printStackTrace();
         }
+    }
+
+    public static void showToast(@NonNull Context appContext, @StringRes int resId) {
+        showToast(appContext, appContext.getResources().getString(resId));
     }
 
     public static void showToast(@NonNull Context appContext, @StringRes int resId, Object... args) {

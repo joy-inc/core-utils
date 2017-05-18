@@ -17,6 +17,14 @@ public class CollectionUtil {
         return !isEmpty(collection);
     }
 
+    public static boolean isEmpty(Object[] objects) {
+        return objects == null || objects.length == 0;
+    }
+
+    public static boolean isNotEmpty(Object[] objects) {
+        return !isEmpty(objects);
+    }
+
     public static boolean isEmpty(Map<?, ?> map) {
         return map == null || map.isEmpty();
     }
