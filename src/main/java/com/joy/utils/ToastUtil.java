@@ -1,5 +1,6 @@
 package com.joy.utils;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -9,18 +10,17 @@ public class ToastUtil {
 
     private static Toast mToast;
 
-    private static void initToast(@NonNull Context appContext) {
-        if (mToast == null) {
-            mToast = Toast.makeText(appContext, "", Toast.LENGTH_SHORT);
-        }
-    }
-
     public static void showToast(@NonNull Context appContext, String text) {
         if (TextUtil.isEmpty(text)) {
             return;
         }
         try {
-            initToast(appContext);
+            if (mToast == null) {
+                if (!(appContext instanceof Application)) {
+                    appContext = appContext.getApplicationContext();
+                }
+                mToast = Toast.makeText(appContext, "", Toast.LENGTH_SHORT);
+            }
             mToast.setText(text);
             mToast.show();
         } catch (Throwable t) {

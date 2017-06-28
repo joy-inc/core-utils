@@ -9,6 +9,8 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * Created by KEVIN.DAI on 15/7/10.
@@ -78,5 +80,10 @@ public class DeviceUtil {
     public static boolean sdcardIsEnable() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
                 && !Environment.getExternalStorageState().equals(Environment.MEDIA_SHARED);
+    }
+
+    public static void hideSoftInput(Context context, View attachView) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(attachView.getWindowToken(), 0);
     }
 }

@@ -47,8 +47,8 @@ public class AppUtil {
             return packInfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
+            return 1;
         }
-        return 1;
     }
 
     /**
@@ -60,8 +60,7 @@ public class AppUtil {
             return TextUtil.filterNull(packInfo.versionName);
         } catch (Exception e) {
             e.printStackTrace();
+            return TextUtil.TEXT_EMPTY;
         }
-        return TextUtil.TEXT_EMPTY;
     }
-
 }

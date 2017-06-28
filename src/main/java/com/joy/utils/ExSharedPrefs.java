@@ -114,7 +114,7 @@ public class ExSharedPrefs {
             e.printStackTrace();
         } finally {
             IOUtil.closeOutStream(oos);
-            IOUtil.closeOutStream(baos);
+//            IOUtil.closeOutStream(baos);// ByteArrayOutputStream没必要close
         }
         return false;
     }
