@@ -42,6 +42,10 @@ public class TextUtil {
         }
     }
 
+    public static boolean isEquals(String a, String b) {
+        return a != null && a.equals(b);
+    }
+
     /**
      * 判断字符串是否由数字组成
      *

@@ -1,6 +1,8 @@
 package com.joy.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -85,5 +87,20 @@ public class DeviceUtil {
     public static void hideSoftInput(Context context, View attachView) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(attachView.getWindowToken(), 0);
+    }
+
+    public static boolean hasApp(@NonNull Context appContext, @NonNull String packageName) {
+        if (TextUtils.isEmpty(packageName)) {
+            return false;
+        }
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = appContext.getPackageManager().getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return packageInfo == null ? false : true;
     }
 }
