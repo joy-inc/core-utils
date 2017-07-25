@@ -1,10 +1,2 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.joy.utils">
-
-    <application
-        android:allowBackup="true"
-        android:supportsRtl="true">
-
-    </application>
-
+<manifest package="com.joy.utils">
 </manifest>
