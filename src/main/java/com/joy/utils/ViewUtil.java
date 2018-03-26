@@ -6,33 +6,6 @@ import android.widget.ImageView;
 
 public class ViewUtil {
 
-    public static void showView(View v) {
-        if (v == null) {
-            return;
-        }
-        if (v.getVisibility() != View.VISIBLE) {
-            v.setVisibility(View.VISIBLE);
-        }
-    }
-
-    public static void hideView(View v) {
-        if (v == null) {
-            return;
-        }
-        if (v.getVisibility() != View.INVISIBLE) {
-            v.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    public static void goneView(View v) {
-        if (v == null) {
-            return;
-        }
-        if (v.getVisibility() != View.GONE) {
-            v.setVisibility(View.GONE);
-        }
-    }
-
     public static void showImageView(ImageView v, int imageResId) {
         if (v == null) {
             return;
@@ -77,26 +50,32 @@ public class ViewUtil {
         v.setImageDrawable(null);
     }
 
-    public static void showViews(View... views) {
+    public static void showView(View... views) {
         if (CollectionUtil.isNotEmpty(views)) {
             for (View v : views) {
-                showView(v);
+                if (v != null && v.getVisibility() != View.VISIBLE) {
+                    v.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
 
-    public static void hideViews(View... views) {
+    public static void hideView(View... views) {
         if (CollectionUtil.isNotEmpty(views)) {
             for (View v : views) {
-                hideView(v);
+                if (v != null && v.getVisibility() != View.INVISIBLE) {
+                    v.setVisibility(View.INVISIBLE);
+                }
             }
         }
     }
 
-    public static void goneViews(View... views) {
+    public static void goneView(View... views) {
         if (CollectionUtil.isNotEmpty(views)) {
             for (View v : views) {
-                goneView(v);
+                if (v != null && v.getVisibility() != View.GONE) {
+                    v.setVisibility(View.GONE);
+                }
             }
         }
     }
